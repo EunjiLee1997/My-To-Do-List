@@ -18,9 +18,10 @@ const Block = styled.div`
 function Main({ todos }) {
   return (
     <Block>
-      {todos.map((todo) => (
-        <ToDoItem key={todo.id} text={todo.text} done={todo.done} />
-      ))}
+      {todos &&
+        todos.map((todo) => (
+          <ToDoItem key={todo.id} text={todo.text} done={todo.done} />
+        ))}
     </Block>
   );
 }
