@@ -55,31 +55,31 @@ const Text = styled.div`
     `}
 `;
 
-function ToDoItem({ key, text, done }) {
+function ToDoItem({ id, text, done, param }) {
   const [isDone, setIsDone] = useState(false);
   const handleDeleteClick = () => {
-    // fetch(`http://localhost:3001/todos/${params}}`, {
-    //   method: "DELETE",
-    // })
-    //   .then(() => {
-    //     window.location.reload();
-    //   })
-    //   .catch((err) => console.log(err));
+    fetch(`http://localhost:3001/todos/${param}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
   const handleDoneClick = () => {
-    // setIsDone(!isDone);
-    // fetch(`http://localhost:3001/todos/${params}`, {
-    //   method: "PATCH",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(isDone),
-    // })
-    //   .then(() => {
-    //     window.location.reload();
-    //   })
-    //   .catch((err) => console.log(err));
+    setIsDone(!isDone);
+    fetch(`http://localhost:3001/todos/${param}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(isDone),
+    })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   };
   return (
-    <ToDoItemBlock key={key}>
+    <ToDoItemBlock key={id}>
       <CheckCircle done={done} onClick={handleDoneClick}>
         {done && <MdDone />}
       </CheckCircle>

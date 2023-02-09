@@ -20,7 +20,12 @@ function Main({ todos }) {
     <Block>
       {todos &&
         todos.map((todo) => (
-          <ToDoItem key={todo.id} text={todo.text} done={todo.done} />
+          <ToDoItem
+            key={todo.id}
+            text={todo.text}
+            done={todo.done}
+            param={todo.id}
+          />
         ))}
     </Block>
   );
