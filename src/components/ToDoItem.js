@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import { MdDone, MdDelete } from "react-icons/md";
 
@@ -55,13 +55,37 @@ const Text = styled.div`
     `}
 `;
 
-function ToDoItem({ id, done, text }) {
+function ToDoItem({ key, text, done }) {
+  const [isDone, setIsDone] = useState(false);
+  const handleDeleteClick = () => {
+    // fetch(`http://localhost:3001/todos/${params}}`, {
+    //   method: "DELETE",
+    // })
+    //   .then(() => {
+    //     window.location.reload();
+    //   })
+    //   .catch((err) => console.log(err));
+  };
+  const handleDoneClick = () => {
+    // setIsDone(!isDone);
+    // fetch(`http://localhost:3001/todos/${params}`, {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(isDone),
+    // })
+    //   .then(() => {
+    //     window.location.reload();
+    //   })
+    //   .catch((err) => console.log(err));
+  };
   return (
-    <ToDoItemBlock>
-      <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
+    <ToDoItemBlock key={key}>
+      <CheckCircle done={done} onClick={handleDoneClick}>
+        {done && <MdDone />}
+      </CheckCircle>
       <Text done={done}>{text}</Text>
       <Remove>
-        <MdDelete />
+        <MdDelete onClick={handleDeleteClick} />
       </Remove>
     </ToDoItemBlock>
   );

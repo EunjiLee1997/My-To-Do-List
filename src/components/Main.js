@@ -15,13 +15,12 @@ const Block = styled.div`
   justify-content: center;
 `;
 
-function Main() {
+function Main({ todos }) {
   return (
     <Block>
-      <ToDoItem text="빨래하기" done={false} />
-      <ToDoItem text="청소하기" done={false} />
-      <ToDoItem text="장보기" done={false} />
-      <ToDoItem text="산책하기" done={true} />
+      {todos.map((todo) => (
+        <ToDoItem key={todo.id} text={todo.text} done={todo.done} />
+      ))}
     </Block>
   );
 }

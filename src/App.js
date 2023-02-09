@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import Main from "./components/Main";
+import { createGlobalStyle } from "styled-components";
+
 import Form from "./components/Form";
-import ToDoItem from "./components/ToDoItem";
+import Main from "./components/Main";
+import useFetch from "./hooks/useFetch";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -10,20 +10,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const wrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 function App() {
+  const [data] = useFetch("http://localhost:3001/todos");
+  console.log(data);
   return (
     <>
       <GlobalStyle />
-      <div className="wrap">
+      <>
         <Form />
-        <Main />
-      </div>
+        <Main todos={data} />
+      </>
     </>
   );
 }

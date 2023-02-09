@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const FormContainer = styled.form`
@@ -40,9 +40,28 @@ const Button = styled.button`
 `;
 
 function Form() {
+  const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const content = { text, done: false };
+    const request = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(content),
+    };
+    fetch("http://localhost:3001/todos", request)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => console.log(error));
+  };
   return (
-    <FormContainer>
-      <AddListInput placeholder="할 일을 입력해주세요."></AddListInput>
+    <FormContainer onSubmit={handleSubmit}>
+      <AddListInput
+        placeholder="할 일을 입력해주세요."
+        onChange={(e) => setText(e.target.value)}
+      ></AddListInput>
       <Button>Add</Button>
     </FormContainer>
   );
