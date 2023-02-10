@@ -56,7 +56,6 @@ const Text = styled.div`
 `;
 
 function ToDoItem({ id, text, done, param }) {
-  const [isDone, setIsDone] = useState(false);
   const handleDeleteClick = () => {
     fetch(`http://localhost:3001/todos/${param}`, {
       method: "DELETE",
@@ -67,11 +66,11 @@ function ToDoItem({ id, text, done, param }) {
       .catch((err) => console.log(err));
   };
   const handleDoneClick = () => {
-    setIsDone(!isDone);
+    done ? (done = false) : (done = true);
     fetch(`http://localhost:3001/todos/${param}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(isDone),
+      body: JSON.stringify({ done }),
     })
       .then(() => {
         window.location.reload();
